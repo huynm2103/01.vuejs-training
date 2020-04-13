@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<header>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Vuejs</title>
+		<link rel="stylesheet" href="" />
+		<script src="vue.js"></script>
+		<style>
+			.demo {
+				width: 100px;
+				height: 100px;
+				background-color: gray;
+				display: inline-block;
+				margin: 10px;
+			}
+
+			.red {
+				background-color: red;
+			}
+
+			.blue {
+				background-color: blue;
+			}
+		</style>
+	</header>
+	<body>
+		<div id="App">
+			<ul>
+				<li v-for="(fruit, i) in fruits" :key="fruit">{{ fruit }} - ({{ i }})</li>
+			</ul>
+			<button @click="fruits.push('melon')">Add new</button>
+			<ul>
+				<li v-for="person in staff">
+					<div v-for="(value, key, index) in person">{{ key }}: {{value}} - {{index}}</div>
+				</li>
+			</ul>
+			<p v-if="show">You can see me!<span>Hello!</span></p>
+			<p v-else>Now you see me!</p>
+			<template v-if="show">
+				<h1>Heading</h1>
+				<p>Inside a template</p>
+			</template>
+			<p v-show="show">Do you also see me?</p>
+			<button @click="show = !show">Show</button>
+			<hr />
+			<div
+				class="demo"
+				@click="attachRed = !attachRed"
+				:class="{red: attachRed}"
+			></div>
+			<div class="demo" :class="[color, {red: attachRed}]"></div>
+			<div class="demo" :style="{'background-color': color}"></div>
+			<hr />
+			<input type="text" v-model="color" />
+			<hr />
+			<input
+				type="text"
+				@input="changeTitle"
+				placeholder="using function to update"
+			/>
+			<input type="text" v-model="title" placeholder="using v-model" />
+			{{ title }} : <a :href="link"> Google! </a>
+			<hr />
+			<p v-html="finishedLink"></p>
+			<hr />
+			<button @click="increase(2)">
+				Click on it - count up by function
+			</button>
+			<button @click="count++">Count up by data property</button>
+			<button @click="countSecond++">Count up second</button>
+			<p>Counter: {{ count }} | {{ countSecond }}</p>
+			<p>Result: {{ result() }} | {{ output }}</p>
+			<hr />
+			<p @mousemove="updateCoordinates">
+				Coordinates: {{ x }} / {{ y }} -
+				<span @mousemove.stop>Stop update</span>
+			</p>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el: '#App',
+			data: {
+				title: 'Hello World',
+				link: 'http://google.com',
+				finishedLink: '<a href="http://google.com">Google2!</a>',
+				count: 0,
+				x: 0,
+				y: 0,
+				countSecond: 0,
+				attachRed: false,
+				color: 'blue',
+				show: false,
+				fruits: ['apple', 'banana', 'orange'],
+				staff: [
+					{name: "Alex", age: 23},
+					{name: "Anna", age: 20}
+				]
+			},
+			computed: {
+				output: function () {
+					return this.count > 5 ? 'Greater than 5' : 'Smaller than 5';
+				},
+			},
+			watch: {
+				count: function (value) {
+					let vm = this;
+
+					setTimeout(function () {
+						vm.count = 0;
+					}, 2000);
+				},
+			},
+			methods: {
+				changeTitle: function (e) {
+					this.title = e.target.value;
+				},
+				increase: function (step) {
+					this.count += step;
+				},
+				updateCoordinates: function (e) {
+					(this.x = e.clientX), (this.y = e.clientY);
+				},
+				result: function () {
+					return this.count > 5 ? 'Greater than 5' : 'Smaller than 5';
+				},
+			},
+		});
+	</script>
+</html>
