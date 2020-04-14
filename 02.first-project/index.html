@@ -14,11 +14,11 @@
 					<div class="healthbar">
 						<div
 							class="healthbar text-center"
-              style="background-color: green; margin: 0; color: white;"
-              :style="{width: playerHealth + '%'}"
-            >
-              {{ playerHealth }}
-            </div>
+							style="background-color: green; margin: 0; color: white;"
+							:style="{width: playerHealth + '%'}"
+						>
+							{{ playerHealth }}
+						</div>
 					</div>
 				</div>
 				<div class="small-6 columns">
@@ -26,11 +26,11 @@
 					<div class="healthbar">
 						<div
 							class="healthbar text-center"
-              style="background-color: green; margin: 0; color: white;"
-              :style="{width: monsterHealth + '%'}"
-            >
-              {{ monsterHealth }}
-            </div>
+							style="background-color: green; margin: 0; color: white;"
+							:style="{width: monsterHealth + '%'}"
+						>
+							{{ monsterHealth }}
+						</div>
 					</div>
 				</div>
 			</section>
@@ -42,15 +42,22 @@
 			<section class="row controls" v-else>
 				<div class="small-12 columns">
 					<button id="attack" @click="attack">ATTACK</button>
-					<button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+					<button id="special-attack" @click="specialAttack">
+						SPECIAL ATTACK
+					</button>
 					<button id="heal" @click="heal">HEAL</button>
 					<button id="give-up" @click="stopGame">GIVE UP</button>
 				</div>
 			</section>
-			<section class="row log">
+			<section class="row log" v-if="turns.length">
 				<div class="small-12 columns">
 					<ul>
-						<li></li>
+						<li
+							v-for="turn in turns"
+              :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}"
+						>
+							{{ turn.text }}
+						</li>
 					</ul>
 				</div>
 			</section>
