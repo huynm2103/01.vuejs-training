@@ -3,7 +3,9 @@
 		<h3>You may view the User Details here</h3>
 		<p>Many Details</p>
 		<p>Username: {{ switchName() }}</p>
+    <p>Userage: {{ userAge }}</p>
     <button @click='changeName'>Change the name</button>
+    <button @click="resetName()">Change the name with callback function</button>
 	</div>
 </template>
 
@@ -13,7 +15,9 @@ export default {
 		myName: {
 			type: String,
 			default: 'ABC'
-		},
+    },
+    resetName: Function,
+    userAge: Number
 	},
 	methods: {
 		switchName() {
