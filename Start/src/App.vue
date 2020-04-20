@@ -1,20 +1,14 @@
 <template>
-  <div id="app">
     <div class="container">
     
     </div>
-  </div>
 </template>
 
 <script>
-
-export default {
-  name: 'App',
-  components: {
-  }
-}
+    export default {
+        
+    }
 </script>
 
 <style>
-
 </style>
