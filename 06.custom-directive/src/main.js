@@ -3,6 +3,10 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
+Vue.filter('toLower', function(value) {
+  return value.toLowerCase();
+})
+
 Vue.directive('highlight', {
   // eslint-disable-next-line no-unused-vars
   bind(el, binding, vnode) {
