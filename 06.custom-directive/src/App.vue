@@ -2,6 +2,16 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <h1>Animations</h1>
+        <button class="btn btn-primary" @click="show = !show">Show Alert</button>
+        <br><br>
+        <transition name="fade">
+          <div class="alert alert-info" v-if="show">Alert some info!</div>
+        </transition>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Filters & Mixins</h1>
         <p>{{ text | toUpper | toLower }}</p>
         <input v-model="filterText" />
@@ -35,9 +45,10 @@ import { FruitMixin } from "./components/fruitMixin";
 
 export default {
   data() {
-    return ({
-      text: 'Hello there!'
-    })
+    return {
+      text: "Hello there!",
+      show: false
+    };
   },
   components: {
     appList: List
