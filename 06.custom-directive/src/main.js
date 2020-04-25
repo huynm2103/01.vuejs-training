@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueResource from "vue-resource";
+import VueRouter  from "vue-router";
+import { routes } from "./routes.js";
 
 Vue.config.productionTip = false
 
 Vue.use(VueResource);
 Vue.http.options.root = "https://vuejs-http-c4e49.firebaseio.com";
+
+Vue.use(VueRouter);
+const router = new VueRouter({routes})
 
 Vue.filter('toLower', function (value) {
   return value.toLowerCase();
@@ -34,5 +39,6 @@ Vue.directive('highlight', {
 })
 
 new Vue({
+  router,
   render: h => h(App),
 }).$mount('#app')

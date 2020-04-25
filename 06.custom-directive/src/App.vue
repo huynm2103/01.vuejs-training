@@ -2,6 +2,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+				<h1>Router</h1>
+				<hr>
+        <router-view></router-view>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<h1>http</h1>
 				<div class="form-group">
 					<label></label>
