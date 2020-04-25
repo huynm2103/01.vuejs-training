@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueResource from "vue-resource";
 
 Vue.config.productionTip = false
 
-Vue.filter('toLower', function(value) {
+Vue.use(VueResource);
+Vue.http.options.root = "https://vuejs-http-c4e49.firebaseio.com";
+
+Vue.filter('toLower', function (value) {
   return value.toLowerCase();
 })
 
@@ -12,7 +16,7 @@ Vue.directive('highlight', {
   bind(el, binding, vnode) {
     // el.style.backgroundColor = binding.value;
     let delay = 0;
-    if(binding.modifiers['delayed']) {
+    if (binding.modifiers['delayed']) {
       delay = 3000;
     }
     // console.log(binding)
