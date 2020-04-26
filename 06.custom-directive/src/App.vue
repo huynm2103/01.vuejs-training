@@ -4,8 +4,9 @@
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<h1>Router</h1>
 				<hr>
-        <app-header></app-header>
+        <router-view name="header-top"></router-view>
         <router-view></router-view>
+        <router-view name="header-bottom"></router-view>
 			</div>
 		</div>
 		<div class="row">
@@ -82,7 +83,7 @@
 <script>
 import List from './components/List.vue';
 import { FruitMixin } from './components/fruitMixin';
-import Header from "./components/Header";
+// import Header from "./components/Header";
 
 export default {
 	data() {
@@ -100,7 +101,7 @@ export default {
 	},
 	components: {
     appList: List,
-    appHeader: Header
+    // appHeader: Header
 	},
 	mixins: [FruitMixin],
 	filters: {

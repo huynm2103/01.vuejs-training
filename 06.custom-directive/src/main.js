@@ -15,6 +15,11 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+router.beforeEach((to, from, next) => {
+  console.log('before each route')
+   next();
+})
+
 Vue.filter('toLower', function (value) {
   return value.toLowerCase();
 })
