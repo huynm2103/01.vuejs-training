@@ -10,7 +10,10 @@ Vue.use(VueResource);
 Vue.http.options.root = "https://vuejs-http-c4e49.firebaseio.com";
 
 Vue.use(VueRouter);
-const router = new VueRouter({routes})
+const router = new VueRouter({
+  routes,
+  mode: 'history'
+})
 
 Vue.filter('toLower', function (value) {
   return value.toLowerCase();
