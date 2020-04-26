@@ -2,11 +2,19 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+				<h1>Vuex</h1>
+				<app-result :counter="counter"></app-result>
+				<hr />
+				<app-counter @updated="counter += $event"></app-counter>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<h1>Router</h1>
-				<hr>
-        <router-view name="header-top"></router-view>
-        <router-view></router-view>
-        <router-view name="header-bottom"></router-view>
+				<hr />
+				<router-view name="header-top"></router-view>
+				<router-view></router-view>
+				<router-view name="header-bottom"></router-view>
 			</div>
 		</div>
 		<div class="row">
@@ -24,7 +32,7 @@
 					Submit
 				</button>
 				<hr />
-        <div class="form-group">
+				<div class="form-group">
 					<label></label>
 					<input class="form-control" type="text" v-model="node" />
 				</div>
@@ -84,6 +92,8 @@
 import List from './components/List.vue';
 import { FruitMixin } from './components/fruitMixin';
 // import Header from "./components/Header";
+import Counter from './components/Counter.vue';
+import Result from './components/Result.vue';
 
 export default {
 	data() {
@@ -94,14 +104,17 @@ export default {
 				username: '',
 				email: '',
 			},
-      users: [],
-      resource: {},
-      node: 'data'
+			users: [],
+			resource: {},
+			node: 'data',
+			counter: 0,
 		};
 	},
 	components: {
-    appList: List,
-    // appHeader: Header
+		appList: List,
+		// appHeader: Header
+		appCounter: Counter,
+		appResult: Result,
 	},
 	mixins: [FruitMixin],
 	filters: {
@@ -137,15 +150,16 @@ export default {
 			// 	(error) => {
 			// 		console.log(error);
 			// 	}
-      // );
+			// );
 
-      // this.resource.save({}, this.users)
-      this.resource.saveAlt(this.user);
+			// this.resource.save({}, this.users)
+			this.resource.saveAlt(this.user);
 		},
 		fetchData() {
 			// this.$http
-      // 	.get('')
-      this.resource.getData({node: this.node})
+			// 	.get('')
+			this.resource
+				.getData({ node: this.node })
 				.then(
 					(response) => {
 						return response.json();
@@ -163,19 +177,19 @@ export default {
 					this.users = dataArr;
 				});
 		},
-  },
-  created () {
-    const customResource = {
-      saveAlt: {
-        method: "POST",
-        url: "alt.json"
-      },
-      getData: {
-        method: "GET"
-      }
-    }
-    this.resource = this.$resource('{node}.json', {}, customResource)
-  }
+	},
+	created() {
+		const customResource = {
+			saveAlt: {
+				method: 'POST',
+				url: 'alt.json',
+			},
+			getData: {
+				method: 'GET',
+			},
+		};
+		this.resource = this.$resource('{node}.json', {}, customResource);
+	},
 };
 </script>
 
