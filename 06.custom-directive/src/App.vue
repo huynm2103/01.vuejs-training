@@ -3,9 +3,11 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<h1>Vuex</h1>
-				<app-result :counter="counter"></app-result>
+				<app-result></app-result>
 				<hr />
-				<app-counter @updated="counter += $event"></app-counter>
+				<app-counter></app-counter>
+				<input type="text" v-model="value">
+				<p>{{ value }}</p>
 			</div>
 		</div>
 		<div class="row">
@@ -94,6 +96,7 @@ import { FruitMixin } from './components/fruitMixin';
 // import Header from "./components/Header";
 import Counter from './components/Counter.vue';
 import Result from './components/Result.vue';
+import * as types from './store/types';
 
 export default {
 	data() {
@@ -115,6 +118,16 @@ export default {
 		// appHeader: Header
 		appCounter: Counter,
 		appResult: Result,
+	},
+	computed: {
+		value: {
+			get() {
+				return this.$store.getters[types.VALUE];
+			},
+			set(value) {
+				this.$store.dispatch(types.UPDATE_VALUE, value);
+			}
+		}
 	},
 	mixins: [FruitMixin],
 	filters: {
